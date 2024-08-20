@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List App</title>
-    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js" defer></script>
 </head>
 <body>
     <h1>Todo List App</h1>
+
+    <main>
+        <div class="todo-list-container">
+            <form class="todo-form">
+                <input placeholder="Add a new todo..." class="todo-input" value=""/>
+                <button>Add Todo</button>
+            </form>
+            <ul class="todo-list"> 
+                <li class="todo-list-item">
+                    <span>Todo example</span>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </li>
+            </ul>
+        </div>
+    </main>
+
 </body>
 </html>
