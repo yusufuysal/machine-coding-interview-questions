@@ -1,11 +1,11 @@
 // select the input element and get its value when changes and set it to a variable
 
-let newTodoName = "";
-
 const form = document.querySelector(".todo-form");
 const input = document.querySelector(".todo-input");
 const list = document.querySelector(".todo-list");
 const listItem = document.querySelector(".todo-list-item");
+
+let newTodoName = input.value;
 
 function addNewTodoItem() {
   const newListItem = document.createElement("li");
@@ -30,10 +30,11 @@ input.addEventListener("input", function () {
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  if (newTodoName !== "") {
+  if (newTodoName.trim() !== "") {
     // call a function to add a new item to the list
     addNewTodoItem();
-    newTodoName = "";
+
+    input.value = "";
   }
 
   console.log(`${newTodoName} is added.`);
