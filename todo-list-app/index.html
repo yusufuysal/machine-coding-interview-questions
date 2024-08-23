@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="index.js" defer></script>
-</head>
-<body>
-    <h1>Todo List App</h1>
-
-    <main>
-        <div class="todo-list-container">
-            <form class="todo-form">
-                <input placeholder="Add a new todo..." class="todo-input" value=""/>
-                <button>Add Todo</button>
-            </form>
-            <ul class="todo-list"> 
-                <li>
-                    <span>Todo example</span>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </li>
-            </ul>
-        </div>
+  </head>
+  <body>
+    <main class="wrapper">
+      <h1 class="h1-title">Todo List App</h1>
+      <div class="todo-list-container">
+        <form class="todo-form">
+          <input placeholder="Add a new todo..." class="todo-input" value="" />
+          <button class="btn">Add Todo</button>
+        </form>
+        <ul class="todo-list">
+          <li class="todo-list-item">
+            <span class="todo-item-name">Todo example</span>
+            <button class="btn edit-btn">Edit</button>
+            <button class="btn delete-btn">Delete</button>
+          </li>
+        </ul>
+      </div>
     </main>
-
-</body>
+  </body>
 </html>

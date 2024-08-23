@@ -18,11 +18,13 @@ function addNewTodoItem() {
 
   const editBtn = document.createElement("button");
   editBtn.innerText = "Edit";
+  editBtn.classList.add("btn");
   editBtn.classList.add("edit-btn");
   editBtn.addEventListener("click", editTodoItem);
 
   const deleteBtn = document.createElement("button");
   deleteBtn.innerText = "Delete";
+  deleteBtn.classList.add("btn");
   deleteBtn.classList.add("delete-btn");
   deleteBtn.addEventListener("click", deleteTodoItem);
 
@@ -47,6 +49,7 @@ function editTodoItem(e) {
 
   const editFormInput = document.createElement("input");
   editFormInput.value = currentText;
+  editFormInput.classList.add("todo-input");
 
   editForm.append(editFormInput);
   editForm.addEventListener("submit", saveEdit);
@@ -55,11 +58,16 @@ function editTodoItem(e) {
 
   const saveBtn = document.createElement("button");
   saveBtn.innerText = "Save";
+  saveBtn.classList.add("btn");
+  saveBtn.classList.add("save-btn");
   saveBtn.addEventListener("click", saveEdit);
   todoItemEditBtn.replaceWith(saveBtn);
 
   const cancelBtn = document.createElement("button");
   cancelBtn.innerText = "Cancel";
+  cancelBtn.classList.add("btn");
+  cancelBtn.classList.add("cancel-btn");
+
   cancelBtn.addEventListener("click", cancelEdit);
   todoItemDeleteBtn.replaceWith(cancelBtn);
 
@@ -70,6 +78,11 @@ function editTodoItem(e) {
 
   function saveEdit(e) {
     e.preventDefault();
+
+    if (editFormInput.value.trim() === "") {
+      return;
+    }
+
     editForm.replaceWith(todoItemSpan);
     todoItemSpan.innerText = editFormInput.value;
 
@@ -87,7 +100,6 @@ function editTodoItem(e) {
 //handle input change and update the newTodoName accordingly
 input.addEventListener("input", function () {
   newTodoName = this.value;
-  console.log({ newTodoName });
 });
 
 //form submit to add the new todo item value to the list
