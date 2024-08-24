@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header,
+.footer {
+  height: 50px;
+  background: #000000ea;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  flex: 1;
+  display: flex;
+}
+
+.navbar {
+  width: 100px;
+  background: rgb(245, 208, 214);
+}
+
+.sidebar {
+  width: 100px;
+  background: rgb(147, 196, 245);
+}
+
+.main-content {
+  flex: 1;
+  background: rgb(222, 220, 220);
+}
