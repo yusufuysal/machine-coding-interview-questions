@@ -3,16 +3,11 @@
 const todoListForm = document.querySelector(".todo-form");
 const newTodoInput = document.querySelector(".todo-input");
 const todoList = document.querySelector(".todo-list");
+let isEditing = false;
+let itemToEdit = null;
 
 //call this function when form is submitted to add new item
-function addNewTodoItem(e) {
-  e.preventDefault();
-
-  if (newTodoInput.value.trim() === "") {
-    alert("You cannot leave the todo input as blank!");
-    return;
-  }
-
+function addNewTodoItem() {
   const newTodoListItem = document.createElement("li");
   newTodoListItem.innerHTML = `<span class="todo-item-name">${newTodoInput.value}</span>`;
   newTodoListItem.classList.add("todo-list-item");
@@ -26,32 +21,23 @@ function addNewTodoItem(e) {
   editBtn.classList.add("btn", "edit-btn");
   deleteBtn.classList.add("btn", "delete-btn");
 
-  editBtn.addEventListener("click", editTodoItem);
-  deleteBtn.addEventListener("click", deleteTodoItem);
-
   newTodoListItem.append(editBtn, deleteBtn);
   todoList.append(newTodoListItem);
 
   newTodoInput.value = "";
 }
 
-//delete item from the list
-function deleteTodoItem(e) {
-  const itemToDelete = e.target.parentElement;
-  todoList.removeChild(itemToDelete);
-}
-
 //edit item in the list
-function editTodoItem(e) {
-  const todoItemSpan = e.target.parentElement.childNodes[0];
-  const todoItemEditBtn = e.target.parentElement.childNodes[1];
-  const todoItemDeleteBtn = e.target.parentElement.childNodes[2];
-  const currentText = todoItemSpan.innerText;
+function editTodoItem(todoItem) {
+  console.log(todoItem);
+
+  const todoItemSpan = todoItem.childNodes[0];
+  const todoItemEditBtn = todoItem.childNodes[1];
+  const todoItemDeleteBtn = todoItem.childNodes[2];
 
   const editForm = document.createElement("form");
-
   const editFormInput = document.createElement("input");
-  editFormInput.value = currentText;
+  editFormInput.value = todoItemSpan.innerText;
   editFormInput.classList.add("todo-input");
 
   editForm.append(editFormInput);
@@ -61,16 +47,13 @@ function editTodoItem(e) {
 
   const saveBtn = document.createElement("button");
   saveBtn.innerText = "Save";
-  saveBtn.classList.add("btn");
-  saveBtn.classList.add("save-btn");
+  saveBtn.classList.add("btn", "save-btn");
   saveBtn.addEventListener("click", saveEdit);
   todoItemEditBtn.replaceWith(saveBtn);
 
   const cancelBtn = document.createElement("button");
   cancelBtn.innerText = "Cancel";
-  cancelBtn.classList.add("btn");
-  cancelBtn.classList.add("cancel-btn");
-
+  cancelBtn.classList.add("btn", "cancel-btn");
   cancelBtn.addEventListener("click", cancelEdit);
   todoItemDeleteBtn.replaceWith(cancelBtn);
 
@@ -94,16 +77,34 @@ function editTodoItem(e) {
 
   function cancelEdit() {
     editForm.replaceWith(todoItemSpan);
-    todoItemSpan.innerText = currentText;
 
     revertButtons();
   }
 }
 
-//handle input change and update the newTodoName accordingly
-newTodoInput.addEventListener("input", function () {
-  newTodoName = this.value;
+//form submit to add the new todo item value to the list
+todoListForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  if (newTodoInput.value.trim() === "") {
+    alert("You cannot leave the todo input as blank!");
+    return;
+  }
+
+  addNewTodoItem();
 });
 
-//form submit to add the new todo item value to the list
-todoListForm.addEventListener("submit", addNewTodoItem);
+todoList.addEventListener("click", function (event) {
+  if (event.target.tagName === "BUTTON") {
+    const todoItem = event.target.parentElement;
+
+    if (event.target.innerText === "DELETE") {
+      todoItem.remove();
+    } else if (event.target.innerText === "EDIT") {
+      isEditing = true;
+      itemToEdit = todoItem;
+
+      editTodoItem(itemToEdit);
+    }
+  }
+});
