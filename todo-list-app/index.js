@@ -3,8 +3,6 @@
 const todoListForm = document.querySelector(".todo-form");
 const newTodoInput = document.querySelector(".todo-input");
 const todoList = document.querySelector(".todo-list");
-let isEditing = false;
-let itemToEdit = null;
 
 //call this function when form is submitted to add new item
 function addNewTodoItem() {
@@ -102,10 +100,7 @@ todoList.addEventListener("click", function (event) {
     if (event.target.innerText === "DELETE") {
       todoItem.remove();
     } else if (event.target.innerText === "EDIT") {
-      isEditing = true;
-      itemToEdit = todoItem;
-
-      editTodoItem(itemToEdit);
+      editTodoItem(todoItem);
     }
   }
 });
