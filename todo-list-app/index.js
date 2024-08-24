@@ -4,10 +4,15 @@ const todoListForm = document.querySelector(".todo-form");
 const newTodoInput = document.querySelector(".todo-input");
 const todoList = document.querySelector(".todo-list");
 
-let newTodoName = "";
-
 //call this function when form is submitted to add new item
-function addNewTodoItem() {
+function addNewTodoItem(e) {
+  e.preventDefault();
+
+  if (newTodoInput.value.trim() === "") {
+    alert("You cannot leave the todo input as blank!");
+    return;
+  }
+
   const newTodoListItem = document.createElement("li");
   newTodoListItem.innerHTML = `<span class="todo-item-name">${newTodoInput.value}</span>`;
   newTodoListItem.classList.add("todo-list-item");
@@ -26,6 +31,8 @@ function addNewTodoItem() {
 
   newTodoListItem.append(editBtn, deleteBtn);
   todoList.append(newTodoListItem);
+
+  newTodoInput.value = "";
 }
 
 //delete item from the list
@@ -99,14 +106,4 @@ newTodoInput.addEventListener("input", function () {
 });
 
 //form submit to add the new todo item value to the list
-todoListForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  if (newTodoName.trim() !== "") {
-    // call a function to add a new item to the list
-    addNewTodoItem();
-
-    newTodoInput.value = "";
-    newTodoName = "";
-  }
-});
+todoListForm.addEventListener("submit", addNewTodoItem);
