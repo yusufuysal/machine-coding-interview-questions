@@ -1,41 +1,37 @@
 // select the input element and get its value when changes and set it to a variable
 
-const form = document.querySelector(".todo-form");
-const input = document.querySelector(".todo-input");
-const list = document.querySelector(".todo-list");
-const listItem = document.querySelector(".todo-list-item");
+const todoListForm = document.querySelector(".todo-form");
+const newTodoInput = document.querySelector(".todo-input");
+const todoList = document.querySelector(".todo-list");
 
 let newTodoName = "";
 
 //call this function when form is submitted to add new item
 function addNewTodoItem() {
-  const newListItem = document.createElement("li");
-  newListItem.classList.add("todo-list-item");
-
-  const itemNameSpan = document.createElement("span");
-  itemNameSpan.innerText = newTodoName;
-  itemNameSpan.classList.add("todo-item-name");
+  const newTodoListItem = document.createElement("li");
+  newTodoListItem.innerHTML = `<span class="todo-item-name">${newTodoInput.value}</span>`;
+  newTodoListItem.classList.add("todo-list-item");
 
   const editBtn = document.createElement("button");
-  editBtn.innerText = "Edit";
-  editBtn.classList.add("btn");
-  editBtn.classList.add("edit-btn");
-  editBtn.addEventListener("click", editTodoItem);
-
   const deleteBtn = document.createElement("button");
-  deleteBtn.innerText = "Delete";
-  deleteBtn.classList.add("btn");
-  deleteBtn.classList.add("delete-btn");
+
+  editBtn.innerText = "EDIT";
+  deleteBtn.innerText = "DELETE";
+
+  editBtn.classList.add("btn", "edit-btn");
+  deleteBtn.classList.add("btn", "delete-btn");
+
+  editBtn.addEventListener("click", editTodoItem);
   deleteBtn.addEventListener("click", deleteTodoItem);
 
-  newListItem.append(itemNameSpan, editBtn, deleteBtn);
-  list.append(newListItem);
+  newTodoListItem.append(editBtn, deleteBtn);
+  todoList.append(newTodoListItem);
 }
 
 //delete item from the list
 function deleteTodoItem(e) {
   const itemToDelete = e.target.parentElement;
-  list.removeChild(itemToDelete);
+  todoList.removeChild(itemToDelete);
 }
 
 //edit item in the list
@@ -98,19 +94,19 @@ function editTodoItem(e) {
 }
 
 //handle input change and update the newTodoName accordingly
-input.addEventListener("input", function () {
+newTodoInput.addEventListener("input", function () {
   newTodoName = this.value;
 });
 
 //form submit to add the new todo item value to the list
-form.addEventListener("submit", function (e) {
+todoListForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
   if (newTodoName.trim() !== "") {
     // call a function to add a new item to the list
     addNewTodoItem();
 
-    input.value = "";
+    newTodoInput.value = "";
     newTodoName = "";
   }
 });
