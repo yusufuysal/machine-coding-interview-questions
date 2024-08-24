@@ -44,6 +44,7 @@ function editTodoItem(todoItem) {
   editForm.addEventListener("submit", saveEdit);
 
   todoItemSpan.replaceWith(editForm);
+  editFormInput.focus();
 
   const saveBtn = document.createElement("button");
   saveBtn.innerText = "Save";
