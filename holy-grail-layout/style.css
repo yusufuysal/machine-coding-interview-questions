@@ -23,22 +23,37 @@ body {
   justify-content: center;
 }
 
-.wrapper {
+.container {
   flex: 1;
   display: flex;
 }
 
-.navbar {
-  width: 100px;
-  background: rgb(245, 208, 214);
-}
-
-.sidebar {
-  width: 100px;
-  background: rgb(147, 196, 245);
+.container > * {
+  padding: 24px;
 }
 
 .main-content {
   flex: 1;
   background: rgb(222, 220, 220);
+}
+.left-sidebar {
+  width: 200px;
+  background: rgb(245, 208, 214);
+}
+
+.right-sidebar {
+  width: 200px;
+  background: rgb(147, 196, 245);
+}
+
+@media only screen and (max-width: 480px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .left-sidebar,
+  .right-sidebar {
+    width: 100%;
+    padding: 24px;
+  }
 }
