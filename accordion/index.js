@@ -21,39 +21,25 @@ const accordionSectionsList = document.querySelector(
 );
 
 console.log(accordionSectionsList);
-let activeAccordionIndex = -1;
 
 document.addEventListener("DOMContentLoaded", function () {
-  accordionSections.forEach((item) => {
+  accordionSections.forEach((item, index) => {
     const accordionListItem = document.createElement("li");
     accordionListItem.innerHTML = `<section class='accordion-item-section'> <button>${item.title}</button> <p class='hidden'>${item.content}</p><section>`;
+
+    if (index === 0) {
+      accordionListItem.querySelector("button").classList.add("opened");
+    }
 
     accordionSectionsList.append(accordionListItem);
   });
 
   accordionSectionsList.addEventListener("click", function (event) {
-    const accordionElementsArr = [...accordionSectionsList.children];
-
-    //find the index of clicked element
     if (event.target.tagName === "BUTTON") {
-      //remove hidden class from the previous selected item
-      accordionElementsArr.forEach((item) => {
-        item.querySelector("p").classList.remove("accordion-active");
-      });
-      const clickedIndex = accordionElementsArr.indexOf(
-        event.target.parentElement.parentElement
-      );
-      if (clickedIndex === activeAccordionIndex) {
-        accordionElementsArr[clickedIndex]
-          .querySelector("p")
-          .classList.remove("accordion-active");
-        activeAccordionIndex = -1;
+      if (event.target.classList.contains("opened")) {
+        event.target.classList.remove("opened");
       } else {
-        //add active class to new selected item
-        accordionElementsArr[clickedIndex]
-          .querySelector("p")
-          .classList.add("accordion-active");
-        activeAccordionIndex = clickedIndex;
+        event.target.classList.add("opened");
       }
     }
   });

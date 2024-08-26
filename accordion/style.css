@@ -1,6 +1,7 @@
 .hidden {
   display: none;
 }
-.accordion-active {
+
+button.opened + p {
   display: block;
 }
