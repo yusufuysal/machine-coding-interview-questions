@@ -24,7 +24,7 @@ let activeTabIndex = 0;
 document.addEventListener("DOMContentLoaded", function () {
   for (let i = 0; i < tabsOptions.length; i++) {
     const tabListItem = document.createElement("li");
-    tabListItem.innerHTML = `<button>${tabsOptions[i].title}</button>`;
+    tabListItem.innerHTML = `<button class='tab-btn'>${tabsOptions[i].title}</button>`;
     tabsContainer.append(tabListItem);
   }
   //set the initial active tab as the first item in the array

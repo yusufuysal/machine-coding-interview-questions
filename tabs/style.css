@@ -2,8 +2,34 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: sans-serif;
+  min-height: 100vh;
 }
 
-.active-tab {
-  background: green;
+.main-wrapper {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tabs-container {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+}
+
+.tab-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+li.active-tab > .tab-btn {
+  background: rgb(196, 239, 234);
 }
