@@ -46,11 +46,14 @@ function setActiveTab(index) {
   activeTabIndex = index;
 
   //remove and reset classes for each list item before setting the new one
-  [...tabsContainer.children].forEach((tabListItem) =>
-    tabListItem.classList.remove("active-tab")
-  );
+  [...tabsContainer.children].forEach((tabListItem, idx) => {
+    const button = tabListItem.querySelector("button");
+    tabListItem.classList.remove("active-tab");
+    button.setAttribute("aria-selected", idx === activeTabIndex);
+  });
 
   // set the new active tab class and content
-  tabsContainer.children[activeTabIndex].classList.add("active-tab");
+  const activeTabElement = tabsContainer.children[activeTabIndex];
+  activeTabElement.classList.add("active-tab");
   activeTabContent.innerText = tabsOptions[activeTabIndex].content;
 }
