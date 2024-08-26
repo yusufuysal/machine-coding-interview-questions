@@ -25,7 +25,7 @@ console.log(accordionSectionsList);
 document.addEventListener("DOMContentLoaded", function () {
   accordionSections.forEach((item, index) => {
     const accordionListItem = document.createElement("li");
-    accordionListItem.innerHTML = `<section class='accordion-item-section'> <button>${item.title}</button> <p class='hidden'>${item.content}</p><section>`;
+    accordionListItem.innerHTML = `<section class='accordion-item-section'> <button class='accordion-btn'><p>${item.title}</p> <p class='collapse-icon'>v</p></button> <p class='hidden'>${item.content}</p><section>`;
 
     if (index === 0) {
       accordionListItem.querySelector("button").classList.add("opened");

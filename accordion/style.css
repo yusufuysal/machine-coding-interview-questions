@@ -1,7 +1,37 @@
+body {
+  font-family: sans-serif;
+}
+.accordion-sections-list {
+  list-style: none;
+}
+
 .hidden {
   display: none;
 }
 
-button.opened + p {
+.accordion-btn {
+  border: none;
+  padding: 8px 12px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.accordion-btn.opened {
+  background: #bfbfbf;
+}
+
+.accordion-btn.opened + p {
   display: block;
+  padding-left: 12px;
+}
+.collapse-icon {
+  font-size: 12px;
+  padding: 0;
+}
+
+.accordion-btn.opened > .collapse-icon {
+  transform: rotate(180deg);
 }
