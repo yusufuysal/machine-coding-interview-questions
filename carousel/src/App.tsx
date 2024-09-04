@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
+import "./App.css";
 import Carousel from "./components/Carousel";
 
 function App() {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(images);
-
   const fetchImages = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/photos?_limit=10"
-      );
-      console.log(response);
+      const response = await fetch("https://picsum.photos/v2/list");
       const imagesData = await response.json();
-      console.log(imagesData);
 
       setImages(imagesData);
     } catch (error) {
@@ -30,7 +25,9 @@ function App() {
   }, []);
 
   return (
-    <main>{isLoading ? <p>Loading...</p> : <Carousel images={images} />}</main>
+    <main className="main-wrapper">
+      <Carousel images={images} isLoading={isLoading} />
+    </main>
   );
 }
 

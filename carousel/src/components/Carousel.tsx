@@ -1,15 +1,20 @@
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { useState } from "react";
 
 type Image = {
-  albumId: number;
   id: number;
-  title: string;
-  url: string;
-  thumbnailUrl: string;
+  download_url: string;
 };
 
-const Carousel = ({ images }: { images: Image[] }) => {
-  const [activeImage, setActiveImage] = useState<Image>(images[0]);
+const Carousel = ({
+  images,
+  isLoading,
+}: {
+  images: Image[];
+  isLoading: boolean;
+}) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  console.log(images[currentImageIndex]?.download_url);
 
   const handleChangeImage = (currentImage: Image, direction: number) => {
     const currentIndex = images.findIndex(
@@ -23,18 +28,33 @@ const Carousel = ({ images }: { images: Image[] }) => {
       nextIndex = 0;
     }
 
-    setActiveImage(images[nextIndex]);
+    setCurrentImageIndex(nextIndex);
   };
 
-  return (
-    <article>
-      <button onClick={() => handleChangeImage(activeImage, -1)}>
-        Previous
-      </button>
-      <img src={activeImage?.url} />
+  if (isLoading) {
+    return <p> Loading... </p>;
+  }
 
-      <button onClick={() => handleChangeImage(activeImage, +1)}>Next</button>
-    </article>
+  return (
+    <section className="carousel-container">
+      <img
+        className="carousel-img"
+        src={images[currentImageIndex]?.download_url}
+      />
+      <button
+        className="carousel-btn prev-btn"
+        onClick={() => handleChangeImage(images[currentImageIndex], -1)}
+      >
+        <ArrowBigLeft />
+      </button>
+
+      <button
+        className="carousel-btn next-btn"
+        onClick={() => handleChangeImage(images[currentImageIndex], +1)}
+      >
+        <ArrowBigRight />
+      </button>
+    </section>
   );
 };
 
